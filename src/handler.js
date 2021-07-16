@@ -33,12 +33,10 @@ const addBookHandler = (request, h) => {
     updatedAt,
   };
 
-  books.push(newBook);
-
   if (name === undefined) {
     const response = h.response({
       status: "fail",
-      message: "Gagal menamahkan buku. Mohon isi nama buku",
+      message: "Gagal menambahkan buku. Mohon isi nama buku",
     });
 
     response.code(400);
@@ -55,6 +53,8 @@ const addBookHandler = (request, h) => {
     response.code(400);
     return response;
   }
+
+  books.push(newBook);
 
   const isSuccess = books.filter((book) => book.id === id).length > 0;
 
@@ -80,7 +80,7 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
-const getAllBooksHandler = (request, h) => {
+const getAllBookHandler = (request, h) => {
   const { name, reading, finished } = request.query;
 
   if (name !== undefined) {
@@ -264,7 +264,7 @@ const editBookByIdHandler = (request, h) => {
   if (name === undefined) {
     const response = h.response({
       status: "fail",
-      message: "Gagal memperbarui buku, Mohon isi nama buku",
+      message: "Gagal memperbarui buku. Mohon isi nama buku",
     });
 
     response.code(400);
@@ -343,7 +343,7 @@ const deleteBookByIdHandler = (request, h) => {
 
 module.exports = {
   addBookHandler,
-  getAllBooksHandler,
+  getAllBookHandler,
   getBookByIdHandler,
   editBookByIdHandler,
   deleteBookByIdHandler,
